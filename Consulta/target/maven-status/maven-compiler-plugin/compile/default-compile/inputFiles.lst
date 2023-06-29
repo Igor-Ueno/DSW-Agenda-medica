@@ -1,0 +1,10 @@
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/dao/ConsultaDAO.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/controller/MedicoController.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/dao/GenericDAO.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/domain/Consulta.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/controller/AdminController.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/dao/UsuarioDAO.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/controller/IndexController.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/util/Erro.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/domain/Usuario.java
+/home/alexandre/Consulta/src/main/java/br/ufscar/dc/dsw/controller/PacienteController.java
