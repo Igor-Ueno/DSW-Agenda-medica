@@ -12,10 +12,9 @@
             String contextPath = request.getContextPath().replace("/", "");
             %>
             <div align="center">
-                <h1>Gerenciamento de Médicos</h1>
+                <h1>É isso aí de Médicos</h1>
                 <h2>
-                    <a href="/<%=contextPath%>">Menu Principal</a> &nbsp;&nbsp;&nbsp; 
-                    <a href="/<%=contextPath%>/medico/cadastro">Adicione Novo Médico</a>
+                    <a href="/<%=contextPath%>">Menu Principal</a>
                 </h2>
             </div>
     

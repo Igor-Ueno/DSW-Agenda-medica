@@ -29,3 +29,14 @@
 		<td colspan="2" align="center"><input type="submit" value="<fmt:message key="form.save"/>" /></td>
 	</tr>
 </table>
+
+<script>
+    // Obtendo o valor do parâmetro "CRM" da URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var valorCRM = urlParams.get("CRM");
+	var valorCPF = urlParams.get("CPF");
+
+    // Você pode atribuir o valor a um campo de entrada, exibir em um elemento HTML, etc.
+    document.getElementById("CRMmedico").value = valorCRM;
+    document.getElementById("CPFpaciente").value = valorCPF;
+</script>

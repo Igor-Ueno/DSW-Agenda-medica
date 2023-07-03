@@ -25,10 +25,12 @@ public class ConsultaController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
 	private ConsultaDAO dao;
+    private UsuarioDAO dao_usuario;
 
     @Override
     public void init() {
         dao = new ConsultaDAO();
+        dao_usuario = new UsuarioDAO();
     }
 
     @Override
@@ -71,9 +73,12 @@ public class ConsultaController extends HttpServlet {
                     case "/remocao":
                         remove(request, response);
                     break;
-                    default:
+                    case "/listaCPF":
                         listaConsultaByCPF(request,response);
-                        break;      
+                    break;
+                    default:
+                        listaMedicos(request,response);
+                    break;
                 }
             } catch (RuntimeException | IOException | ServletException e) {
                 throw new ServletException(e);
@@ -165,5 +170,17 @@ public class ConsultaController extends HttpServlet {
         request.setAttribute("listaConsultas", listaConsultas);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/consulta/lista.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void listaMedicos(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("oi lista_medicos");
+        List<Usuario> listaMedicos = dao_usuario.getMedicos();
+        System.out.println("pegou sql");
+        request.setAttribute("listaMedicos", listaMedicos);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/consulta/listaMedicos.jsp");
+        dispatcher.forward(request, response);
+        System.out.println("faz forward");
     }
 }

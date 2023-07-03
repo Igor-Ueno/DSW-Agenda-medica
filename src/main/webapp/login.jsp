@@ -48,6 +48,13 @@
                     </table>
                 </form>
             </div>
+
+            <div align="center">
+                <h2>
+                    <a href="${pageContext.request.contextPath}/medico/">Lista de médicos</a> &nbsp;&nbsp;&nbsp; 
+                    <a href="${pageContext.request.contextPath}/logado/medico/listaEspecialidades.jsp">Lista de médicos por especialidade</a>
+                </h2>
+            </div>
         </body>
     </fmt:bundle>
 </html>
