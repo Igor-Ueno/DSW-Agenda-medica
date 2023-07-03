@@ -237,4 +237,44 @@ public class UsuarioDAO extends GenericDAO {
         }
         return usuario;
     }
+
+    public List<Usuario> getMedicosPorEspecialidade(String especialidade) {
+        List<Usuario> medicosPorEspecialidade = new ArrayList<>();
+        String sql = "SELECT * FROM Usuario WHERE papel = 'med' AND especialidade = ?";
+        
+        try (Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql)) {
+            
+            statement.setString(1, especialidade);
+            
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Usuario medico = new Usuario();
+                    // medico.setCRM(resultSet.getString("CRM"));
+                    // medico.setEspecialidade(resultSet.getString("especialidade"));
+                    // medico.setNome(resultSet.getString("nome"));
+                    // medico.setLogin(resultSet.getString("login"));
+                    // medico.setSenha(resultSet.getString("senha"));
+                    // medico.setPapel(resultSet.getString("papel"));
+                    // medicosPorEspecialidade.add(medico);
+
+                    // INSERT INTO Usuario (CRM, login, senha, nome, especialidade, papel)
+                    String CRM = resultSet.getString("CRM");
+                    String login = resultSet.getString("login");
+                    String senha = resultSet.getString("senha");
+                    String nome = resultSet.getString("nome");                  
+                    String papel = resultSet.getString("papel");                    
+
+                    Usuario medico = new Usuario(CRM, especialidade, nome, login, senha, papel);
+                    medicosPorEspecialidade.add(medico);
+                }
+                resultSet.close();
+            }
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar médicos por especialidade: " + e.getMessage(), e);
+        }        
+        return medicosPorEspecialidade;
+    }
 }

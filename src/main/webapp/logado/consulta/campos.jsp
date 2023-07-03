@@ -25,7 +25,6 @@
 		<td><label for="hora"><fmt:message key="appointment.time"/></label></td>
 		<td><input type="text" id="hora" name="hora" size="45" required/></td>
 	</tr>
-
 	<tr>
 		<td colspan="2" align="center"><input type="submit" value="<fmt:message key="form.save"/>" /></td>
 	</tr>

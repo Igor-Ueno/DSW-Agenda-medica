@@ -77,6 +77,9 @@ public class MedicoController extends HttpServlet {
 				case "/atualizacao":
                     atualize(request, response);
                     break;
+                case "/listarMedicosPorEspecialidade":
+                    listarMedicosPorEspecialidade(request, response);
+                break;
 				default:
 					lista(request,response);
                     break;
@@ -151,6 +154,15 @@ public class MedicoController extends HttpServlet {
         System.out.println(medico.getNome());
         request.setAttribute("medico", medico);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/medico/formulario.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void listarMedicosPorEspecialidade(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+        List<Usuario> listaMedicosPorEspecialidade = dao.getMedicosPorEspecialidade();
+        request.setAttribute("listaMedicosPorEspecialidade", listaMedicosPorEspecialidade);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/medico/listaEspecialidades.jsp");
         dispatcher.forward(request, response);
     }
 }

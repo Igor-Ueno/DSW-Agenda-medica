@@ -141,7 +141,7 @@ public class Usuario {
     }
 
     public String getStringData_Nascimento(){ 
-        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");  
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");  
         String strDate = dateFormat.format(data_nascimento);
         return strDate;
     }

@@ -16,7 +16,8 @@
                 <h1><fmt:message key="CRUD.label_doc"/></h1>
                 <h2>
                     <a href="/<%=contextPath%>"><fmt:message key="CRUD.menu"/></a> &nbsp;&nbsp;&nbsp; 
-                    <a href="/<%=contextPath%>/medico/cadastro"><fmt:message key="CRUD.add_doc"/></a>
+                    <a href="/<%=contextPath%>/medico/cadastro"><fmt:message key="CRUD.add_doc"/></a> &nbsp;&nbsp;&nbsp;
+                    <a href="/<%=contextPath%>/admin"><fmt:message key="admin.label"/></a>
                 </h2>
             </div>
             <div align="center">
