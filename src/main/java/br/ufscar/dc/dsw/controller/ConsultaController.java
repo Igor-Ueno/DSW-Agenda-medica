@@ -2,7 +2,11 @@ package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Time;
+// import java.text.SimpleDateFormat;
+// import java.text.DateFormat;
 import java.time.LocalDate;
+// import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -69,16 +73,16 @@ public class ConsultaController extends HttpServlet {
                         break;
                     case "/insercao":
                         insere(request, response);
-                    break;
+                        break;
                     case "/remocao":
                         remove(request, response);
-                    break;
+                        break;
                     case "/listaCPF":
                         listaConsultaByCPF(request,response);
-                    break;
+                        break;
                     default:
                         listaMedicos(request,response);
-                    break;
+                        break;  
                 }
             } catch (RuntimeException | IOException | ServletException e) {
                 throw new ServletException(e);
@@ -104,7 +108,9 @@ public class ConsultaController extends HttpServlet {
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+		List<Consulta> listaConsultas = dao.getAll();
+		request.setAttribute("listaConsultas", listaConsultas);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/consulta/formulario.jsp");
         dispatcher.forward(request, response);
     }
@@ -113,14 +119,40 @@ public class ConsultaController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
+        System.out.println("oooooooooooooooooooooooooooooooooooooooooo");
         String CPFpaciente = request.getParameter("CPFpaciente");
+        System.out.println("oooooooooooooooooooooooooooooooooooooooooo");
         String CRMmedico = request.getParameter("CRMmedico");
+        System.out.println("oooooooooooooooooooooooooooooooooooooooooo");
         String data_consulta_str = request.getParameter("data_consulta");
+        System.out.println("oooooooooooooooooooooooooooooooooooooooooo");
         LocalDate localDate = LocalDate.parse(data_consulta_str);
         Date data_consulta = Date.valueOf(localDate);
-        String hora = request.getParameter("hora");
+        System.out.println("oooooooooooooooooooooooooooooooooooooooooo");
+        String hora_str = request.getParameter("hora");
+        System.out.println(hora_str);
+        // Time hora = Time.valueOf(hora_str);
+        Time hora = Time.valueOf(hora_str+":00");
+
+
+        System.out.println("oooooooooooooooooooooooooooooooooooooooooo");
+
+        System.out.println(CPFpaciente);
+        System.out.println(CRMmedico);
+        System.out.println(data_consulta);
+        System.out.println(hora);
+        
+        if(!dao.checkHour(CPFpaciente, CRMmedico, data_consulta, hora)) {
+            System.out.println("ttttttttttttttttttttttttttttttttttttt");
+            response.sendRedirect("lista");
+            System.out.println("ttttttttttttttttttttttttttttttttttttt");
+            return;
+        }
+
         Consulta consulta = new Consulta(CPFpaciente, CRMmedico, data_consulta, hora);
+        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeee");
         dao.insert(consulta);
+        System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqq");
         response.sendRedirect("lista");
     }
 
@@ -137,7 +169,10 @@ public class ConsultaController extends HttpServlet {
         LocalDate localDate = LocalDate.parse(data_consulta_str, formatter);
         Date data_consulta = Date.valueOf(localDate);
         System.out.println(data_consulta);
-        String hora = request.getParameter("hora");
+
+        String hora_str = request.getParameter("hora");
+        Time hora = Time.valueOf(hora_str);
+
         Consulta consulta = new Consulta(CPFpaciente, CRMmedico, data_consulta, hora);
         dao.delete(consulta);
         response.sendRedirect("lista");

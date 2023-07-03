@@ -1,10 +1,7 @@
 package br.ufscar.dc.dsw.domain;
 
 import java.sql.Date;
-// import java.text.DateFormat;
-// import java.text.SimpleDateFormat;
-// import java.util.Calendar;
-// import java.time.LocalDate;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -14,9 +11,9 @@ public class Consulta {
     private String CPFpaciente;
     private String CRMmedico;
     private Date data_consulta;
-    private String hora;
+    private Time hora;
 
-    public Consulta(String CPFpaciente, String CRMmedico, Date data_consulta, String hora) {
+    public Consulta(String CPFpaciente, String CRMmedico, Date data_consulta, Time hora) {
         this.CPFpaciente = CPFpaciente;
         this.CRMmedico = CRMmedico;
         this.data_consulta = data_consulta;
@@ -47,11 +44,11 @@ public class Consulta {
         this.data_consulta = data_consulta;
     }
 
-    public String getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 

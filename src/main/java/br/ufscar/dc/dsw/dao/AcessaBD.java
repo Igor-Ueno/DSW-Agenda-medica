@@ -18,15 +18,6 @@ public class AcessaBD {
 			Connection con = (Connection) DriverManager.getConnection(url,
 					"root", "root");
 
-			/* Setup para uso do banco de dados Apache Derby */
-
-			/*
-			 * Class.forName("org.apache.derby.jdbc.ClientDriver");
-             * String url = "jdbc:derby://localhost:1527/Livraria";
-			 * Connection con = (Connection) DriverManager.getConnection(url, 
-			 *         "root", "root");
-			 */
-
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from Usuario");
 			while (rs.next()) {

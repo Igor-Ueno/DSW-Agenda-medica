@@ -37,8 +37,6 @@ public class PacienteController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
     	Erro erros = new Erro();
-    	
-        // System.out.println(usuario.getNome());
 
     	if (usuario == null) {
     		response.sendRedirect(request.getContextPath());
@@ -96,7 +94,6 @@ public class PacienteController extends HttpServlet {
         request.setAttribute("listaPacientes", listaPacientes);
         System.out.println("cmc forward");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/paciente/lista.jsp");
-        // RequestDispatcher dispatcher = request.getRequestDispatcher("/noAuth.jsp");
         dispatcher.forward(request, response);
         System.out.println("faz forward");
     }

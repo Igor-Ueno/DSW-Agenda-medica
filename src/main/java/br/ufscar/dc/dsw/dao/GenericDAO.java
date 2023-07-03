@@ -9,10 +9,6 @@ abstract public class GenericDAO {
     public GenericDAO() {
         try {
             
-        	/* Setup Banco de dados Derby */
-        	
-        	// Class.forName("org.apache.derby.jdbc.ClientDriver");
-            
         	/* Setup Banco de dados MySQL */
         	
         	Class.forName("com.mysql.cj.jdbc.Driver");
@@ -23,14 +19,6 @@ abstract public class GenericDAO {
     }
 
     protected Connection getConnection() throws SQLException {
-    	
-    	/* Conexão banco de dados Derby
-    	 * 
-    	 * String url = "jdbc:derby://localhost:1527/Login";
-    	 * 
-    	 * return DriverManager.getConnection(url, "root", "root");
-    	 * 
-    	 */
     	
     	/* Conexão banco de dados MySQL */
     	

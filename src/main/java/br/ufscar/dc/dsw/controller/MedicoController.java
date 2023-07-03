@@ -43,13 +43,36 @@ public class MedicoController extends HttpServlet {
     		response.sendRedirect(request.getContextPath());
             return;
     	} else if (!usuario.getPapel().equals("adm")) {
-    		erros.add("Acesso não autorizado!");
-    		erros.add("Apenas Papel [ADM] tem acesso a essa página");
-    		request.setAttribute("mensagens", erros);
-    		RequestDispatcher rd = request.getRequestDispatcher("/noAuth.jsp");
-    		rd.forward(request, response);
-            System.out.println("user redirected");
-            return;
+            String action = request.getPathInfo();
+
+            if (action == null) {
+                action = "";
+
+            }
+
+            System.out.println(action);
+
+            try {
+                switch (action) {
+                    case "/listaMedicos":
+                        lista_medicos(request,response);
+                        break;
+                    case "/listarMedicosPorEspecialidade":
+                        listarMedicosPorEspecialidade(request, response);
+                        break;
+                    default:
+                        erros.add("Acesso não autorizado!");
+                        erros.add("Apenas Papel [ADM] tem acesso a essa página");
+                        request.setAttribute("mensagens", erros);
+                        RequestDispatcher rd = request.getRequestDispatcher("/noAuth.jsp");
+                        rd.forward(request, response);
+                        System.out.println("user redirected");
+                        return;
+                }
+            } catch (RuntimeException | IOException | ServletException e) {
+                throw new ServletException(e);
+            }
+    		
     	} 
 		String action = request.getPathInfo();
 
@@ -172,7 +195,7 @@ public class MedicoController extends HttpServlet {
     private void listarMedicosPorEspecialidade(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-        List<Usuario> listaMedicosPorEspecialidade = dao.getMedicosPorEspecialidade();
+        List<Usuario> listaMedicosPorEspecialidade = dao.getMedicosPorEspecialidade("Urologista");
         request.setAttribute("listaMedicosPorEspecialidade", listaMedicosPorEspecialidade);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/medico/listaEspecialidades.jsp");
         dispatcher.forward(request, response);

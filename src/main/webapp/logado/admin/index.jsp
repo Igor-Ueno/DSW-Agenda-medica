@@ -6,7 +6,6 @@
 <html>
     <fmt:bundle basename="message">
         <head>
-            <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
             <title><fmt:message key="admin.title"/></title>
         </head>
         <body>
@@ -26,7 +25,7 @@
                 <h2>
                     <a href="/<%=contextPath%>/paciente/"><fmt:message key="admin.pat_CRUD"/></a> &nbsp;&nbsp;&nbsp; 
                     <a href="/<%=contextPath%>/medico/"><fmt:message key="admin.doc_CRUD"/></a> &nbsp;&nbsp;&nbsp; 
-                    <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
+                    <a href="${pageContext.request.contextPath}/logout.jsp"><fmt:message key="admin.exit"/></a>
                 </h2>
             </div>
         </body>

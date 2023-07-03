@@ -21,7 +21,7 @@ CREATE TABLE Consulta (
   CPFpaciente VARCHAR(14),
   CRMmedico VARCHAR(20),
   data_consulta DATE,
-  hora varchar(5)
+  hora TIME
 );
 
 

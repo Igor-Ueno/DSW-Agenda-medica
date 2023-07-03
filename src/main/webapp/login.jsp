@@ -41,8 +41,7 @@
                             <td colspan="2"> 
                                 <div align="center">
                                     <input type="submit" name="bOK" value="<fmt:message key="login.enter"/>">
-                                </div>
-                                
+                                </div>                                
                             </td>                     
                         </tr>
                     </table>
@@ -51,8 +50,7 @@
 
             <div align="center">
                 <h2>
-                    <a href="${pageContext.request.contextPath}/medico/">Lista de médicos</a> &nbsp;&nbsp;&nbsp; 
-                    <a href="${pageContext.request.contextPath}/logado/medico/listaEspecialidades.jsp">Lista de médicos por especialidade</a>
+                    <a href="${pageContext.request.contextPath}/consulta_sem_login/lista"><fmt:message key="CRUD.list_doc"/></a>
                 </h2>
             </div>
         </body>

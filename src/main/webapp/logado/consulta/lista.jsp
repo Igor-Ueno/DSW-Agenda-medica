@@ -17,7 +17,7 @@
                 <h2>
                     <a href="/<%=contextPath%>/"><fmt:message key="appointment.menu"/></a> &nbsp;&nbsp;&nbsp;
                     <c:if test="${CPFpaciente != null}">
-                        <a href="/<%=contextPath%>/consulta/cadastro"><fmt:message key="appointment.add_app"/></a>
+                        <a href="/<%=contextPath%>/consulta/"><fmt:message key="appointment.add_app"/></a>
                     </c:if>
                 </h2>
             </div>

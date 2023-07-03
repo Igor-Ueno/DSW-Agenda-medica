@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 	<fmt:bundle basename="message">
 		<head>
 			<title><fmt:message key="appointment.title"/></title>
+			<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 		</head>
 		<body>
 			<div align="center">

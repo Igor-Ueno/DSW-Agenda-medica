@@ -3,7 +3,6 @@ package br.ufscar.dc.dsw.domain;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-// import java.util.Calendar;
 import java.time.LocalDate;
 
 public class Usuario {
