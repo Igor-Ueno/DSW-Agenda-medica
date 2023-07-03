@@ -17,8 +17,14 @@ import br.ufscar.dc.dsw.util.Erro;
 public class IndexController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
 
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Erro erros = new Erro();
 		if (request.getParameter("bOK") != null) {
@@ -32,16 +38,14 @@ public class IndexController extends HttpServlet {
 			}
 			if (!erros.isExisteErros()) {
 				UsuarioDAO dao = new UsuarioDAO();
-				Usuario usuario = dao.getbyLogin(login);
+				Usuario usuario = dao.getByLogin(login);
 				if (usuario != null) {
-					if (usuario.getSenha().equalsIgnoreCase(senha)) {
+					if (usuario.getSenha().equals(senha)) {
 						request.getSession().setAttribute("usuarioLogado", usuario);
-						String contextPath = request.getContextPath().replace("/", "");
-						request.getSession().setAttribute("contextPath", contextPath);
-						if (usuario.getPapel().equals("ADMIN")) {
-							response.sendRedirect("usuarios/");
+						if (usuario.getPapel().equals("adm")) {
+							response.sendRedirect("admin/");
 						} else {
-							response.sendRedirect("compras/");
+							response.sendRedirect("usuario/");
 						}
 						return;
 					} else {
@@ -59,17 +63,5 @@ public class IndexController extends HttpServlet {
 		String URL = "/login.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(URL);
 		rd.forward(request, response);
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		processRequest(request, response);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		processRequest(request, response);
 	}
 }

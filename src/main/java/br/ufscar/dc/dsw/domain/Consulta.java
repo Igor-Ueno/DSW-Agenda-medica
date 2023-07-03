@@ -1,48 +1,54 @@
 package br.ufscar.dc.dsw.domain;
-import java.sql.Timestamp;
+
+import java.sql.Date;
+// import java.text.DateFormat;
+// import java.text.SimpleDateFormat;
+// import java.util.Calendar;
+// import java.time.LocalDate;
 
 public class Consulta {
-    private Long id;
-    private String CPF;
-    private String CRM;
-    private Timestamp data_hora;
+    
+    private String CPFpaciente;
+    private String CRMmedico;
+    private Date data_consulta;
+    private String hora;
 
-    public Consulta(Long id, String CPF, String CRM, Timestamp data_hora) {
-        this.id = id;
-        this.CPF = CPF;
-        this.CRM = CRM;
-        this.data_hora = data_hora;
+    public Consulta(String CPFpaciente, String CRMmedico, Date data_consulta, String hora) {
+        this.CPFpaciente = CPFpaciente;
+        this.CRMmedico = CRMmedico;
+        this.data_consulta = data_consulta;
+        this.hora = hora;
     }
 
-    public Long getId() {
-        return id;
+    public String getCPFpaciente() {
+        return CPFpaciente;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCPFpaciente(String CPFpaciente) {
+        this.CPFpaciente = CPFpaciente;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCRMmedico() {
+        return CRMmedico;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCRMmedico(String CRMmedico) {
+        this.CRMmedico = CRMmedico;
     }
 
-    public String getCRM() {
-        return CRM;
+    public Date getData_Consulta() {
+        return data_consulta;
     }
 
-    public void setCRM(String CRM) {
-        this.CRM = CRM;
+    public void setData_Consulta(Date data_consulta) {
+        this.data_consulta = data_consulta;
     }
 
-    public Timestamp getDataHora() {
-        return data_hora;
+    public String getHora() {
+        return hora;
     }
 
-    public void setDataHora(Timestamp data_hora) {
-        this.data_hora = data_hora;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 }

@@ -1,8 +1,6 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,8 +14,8 @@ import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
 
-@WebServlet(urlPatterns = "/paciente/*")
-public class PacienteController extends HttpServlet {
+@WebServlet(urlPatterns = "/medico/*")
+public class MedicoController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 	private UsuarioDAO dao;
@@ -29,18 +27,19 @@ public class PacienteController extends HttpServlet {
 
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
         doGet(request, response);
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
-    	Erro erros = new Erro();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
     	
-        // System.out.println(usuario.getNome());
-
-    	if (usuario == null) {
+    	Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+        Erro erros = new Erro();
+    	
+		if (usuario == null) {
     		response.sendRedirect(request.getContextPath());
             return;
     	} else if (!usuario.getPapel().equals("adm")) {
@@ -80,7 +79,7 @@ public class PacienteController extends HttpServlet {
                     break;
 				default:
 					lista(request,response);
-                    break;      
+                    break;
             }
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
@@ -89,34 +88,25 @@ public class PacienteController extends HttpServlet {
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        System.out.println("oi lista");
-        List<Usuario> listaPacientes = dao.getPacientes();
-        System.out.println("pegou sql");
-        request.setAttribute("listaPacientes", listaPacientes);
-        System.out.println("cmc forward");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/paciente/lista.jsp");
-        // RequestDispatcher dispatcher = request.getRequestDispatcher("/noAuth.jsp");
+        
+        List<Usuario> listaMedicos = dao.getMedicos();
+        request.setAttribute("listaMedicos", listaMedicos);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/medico/lista.jsp");
         dispatcher.forward(request, response);
-        System.out.println("faz forward");
     }
 
     private void insere(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        String CPF = request.getParameter("CPF");
+        String CRM = request.getParameter("CRM");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String nome = request.getParameter("nome");
-        String telefone = request.getParameter("telefone");
-        String sexo = request.getParameter("sexo");
-        String data_nascimento_str = request.getParameter("data_nascimento");
-        LocalDate localDate = LocalDate.parse(data_nascimento_str);
-        Date data_nascimento = Date.valueOf(localDate);
-        String papel = "pac";
-        Usuario paciente = new Usuario(CPF, login, senha, nome, telefone, sexo, data_nascimento, papel);
-        dao.insert(paciente);
+        String especialidade = request.getParameter("especialidade");
+        String papel = "med";
+        Usuario medico = new Usuario(CRM, especialidade, nome, login, senha, papel);
+        dao.insert(medico);
         response.sendRedirect("lista");
     }
 
@@ -124,48 +114,48 @@ public class PacienteController extends HttpServlet {
             throws IOException {
         request.setCharacterEncoding("UTF-8");
 
-        String CPF = request.getParameter("CPF");
-        System.out.println(CPF);
-        Usuario paciente = dao.getByCPF(CPF);
-        System.out.println(paciente.getNome());
-        dao.delete(paciente);
+        String CRM = request.getParameter("CRM");
+        System.out.println(CRM);
+        Usuario medico = dao.getByCRM(CRM);
+        System.out.println(medico.getNome());
+        dao.delete(medico);
         response.sendRedirect("lista");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String CPF = request.getParameter("CPF");
+        String CRM = request.getParameter("CRM");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String nome = request.getParameter("nome");
-        String telefone = request.getParameter("telefone");
-        String sexo = request.getParameter("sexo");
-        String data_nascimento_str = request.getParameter("data_nascimento");
-        LocalDate localDate = LocalDate.parse(data_nascimento_str);
-        Date data_nascimento = Date.valueOf(localDate);
-        String papel = "pac";
-        Usuario paciente = new Usuario(CPF, login, senha, nome, telefone, sexo, data_nascimento, papel);
-        dao.update(paciente);
+        String especialidade = request.getParameter("especialidade");
+        String papel = "med";
+        Usuario medico = new Usuario(CRM, especialidade, nome, login, senha, papel);
+        dao.update(medico);
         response.sendRedirect("lista");
     }
 	
 	private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/paciente/formulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/medico/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String CPF = request.getParameter("CPF");
-        System.out.println(CPF);
-        Usuario paciente = dao.getByCPF(CPF);
-        System.out.println(paciente.getNome());
-        request.setAttribute("paciente", paciente);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/paciente/formulario.jsp");
+        
+        String CRM = request.getParameter("CRM");
+        System.out.println(CRM);
+        Usuario medico = dao.getByCRM(CRM);        
+        System.out.println(medico.getNome());
+        request.setAttribute("medico", medico);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/medico/formulario.jsp");
         dispatcher.forward(request, response);
     }
 }
+
+
+  
+
+  
