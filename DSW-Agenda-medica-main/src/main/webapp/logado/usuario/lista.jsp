@@ -7,7 +7,8 @@
 <fmt:bundle basename="message">
 
 	<head>
-<title><fmt:message key="page.title" /></title>
+		<title><fmt:message key="page.title" /></title>
+		<link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
 	</head>
 
 	<body>

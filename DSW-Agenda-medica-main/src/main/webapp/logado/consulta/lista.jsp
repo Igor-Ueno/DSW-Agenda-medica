@@ -5,6 +5,7 @@
 <html>
     <head>
         <title>Consultório</title>
+        <link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <%
