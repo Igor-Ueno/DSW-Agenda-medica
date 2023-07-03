@@ -28,6 +28,13 @@ public class ConsultaDAO extends GenericDAO {
             statement.setString(4, consulta.getHora());
             statement.executeUpdate();
 
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            System.out.println(consulta.getCPFpaciente());
+            System.out.println(consulta.getCRMmedico());
+            System.out.println(consulta.getData_Consulta());
+            System.out.println(consulta.getHora());
+
+
             statement.close();
             conn.close();
         } catch (SQLException e) {
@@ -39,11 +46,12 @@ public class ConsultaDAO extends GenericDAO {
 
         List<Consulta> listaConsultas = new ArrayList<>();
 
-        String sql = "SELECT * from Consulta WHERE CPFpaciente = ?";
+        String sql = "SELECT * FROM Consulta WHERE CPFpaciente = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
+            System.out.println(CPFpaciente);
             statement.setString(1, CPFpaciente);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -51,6 +59,11 @@ public class ConsultaDAO extends GenericDAO {
                 String nome = resultSet.getString("CRMmedico");
                 Date login = resultSet.getDate("data_consulta");
                 String senha = resultSet.getString("hora");
+                System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+                System.out.println(resultSet.getString("CPFpaciente"));
+                System.out.println(resultSet.getString("CRMmedico"));
+                System.out.println(resultSet.getDate("data_consulta"));
+                System.out.println(resultSet.getString("hora"));
 
                 Consulta consulta = new Consulta(CPF, nome, login, senha);
                 listaConsultas.add(consulta);
@@ -67,6 +80,8 @@ public class ConsultaDAO extends GenericDAO {
 
     public List<Consulta> getByCRM(String CRMmedico) {
 
+        System.out.println(CRMmedico);
+
         List<Consulta> listaConsultas = new ArrayList<>();
 
         String sql = "SELECT * from Consulta WHERE CRMmedico = ?";
@@ -74,6 +89,7 @@ public class ConsultaDAO extends GenericDAO {
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
+            System.out.println(CRMmedico);
             statement.setString(1, CRMmedico);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -81,6 +97,11 @@ public class ConsultaDAO extends GenericDAO {
                 String nome = resultSet.getString("CRMmedico");
                 Date login = resultSet.getDate("data_consulta");
                 String senha = resultSet.getString("hora");
+                System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                System.out.println(resultSet.getString("CPFpaciente"));
+                System.out.println(resultSet.getString("CRMmedico"));
+                System.out.println(resultSet.getDate("data_consulta"));
+                System.out.println(resultSet.getString("hora"));
 
                 Consulta consulta = new Consulta(CPF, nome, login, senha);
                 listaConsultas.add(consulta);
@@ -103,9 +124,14 @@ public class ConsultaDAO extends GenericDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, consulta.getCPFpaciente());
-            statement.setString(1, consulta.getCRMmedico());
-            statement.setDate(1, consulta.getData_Consulta());
-            statement.setString(1, consulta.getHora());
+            statement.setString(2, consulta.getCRMmedico());
+            statement.setDate(3, consulta.getData_Consulta());
+            statement.setString(4, consulta.getHora());
+            System.out.println("ccccccccccccccccccccccccccccccccccccccccc");
+            System.out.println(consulta.getCPFpaciente());
+            System.out.println(consulta.getCRMmedico());
+            System.out.println(consulta.getData_Consulta());
+            System.out.println(consulta.getHora());
             statement.executeUpdate();
 
             statement.close();

@@ -5,6 +5,9 @@ import java.sql.Date;
 // import java.text.SimpleDateFormat;
 // import java.util.Calendar;
 // import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class Consulta {
     
@@ -50,5 +53,22 @@ public class Consulta {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getStringData_Consulta(){ 
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");  
+        String strDate = dateFormat.format(data_consulta);
+        return strDate;
+    }
+
+    public void setStringData_Consulta(String data_consulta_str){
+        LocalDate localDate = LocalDate.parse(data_consulta_str);
+        this.data_consulta = Date.valueOf(localDate);
+    }
+
+    public String getCRMAlt(){
+        String[] array = CRMmedico.split("/");
+        String CRMalt = array[0] + "-" + array[1];
+        return CRMalt;
     }
 }
